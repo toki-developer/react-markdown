@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import ReactMarkdown from 'react-markdown'
+import SimpleMDE from 'react-simplemde-editor';
+import 'easymde/dist/easymde.min.css';
 
-function App() {
+
+const App = () => {
+
+  const [markdown, setMarkdown] = useState('');
+
+  function handleDrop(data, e) {
+    let files = e.dataTransfer.files;
+        if(files.length > 0){
+            let file = files[0];
+            alert('FileName : ' + file.name );
+        }
+        console.log("写真を置いた")
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <SimpleMDE onChange={(e) => setMarkdown(e)} events={{'drop':handleDrop}}/>
+      <ReactMarkdown source={markdown}　/>
     </div>
   );
 }
