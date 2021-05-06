@@ -2,6 +2,7 @@ import { useState } from 'react';
 import ReactMarkdown from 'react-markdown'
 import SimpleMDE from 'react-simplemde-editor';
 import 'easymde/dist/easymde.min.css';
+import {HashLink} from 'react-router-hash-link';
 
 
 const App = () => {
@@ -17,9 +18,14 @@ const App = () => {
         console.log("写真を置いた")
   }
 
+  console.log(markdown)
+
   return (
     <div>
       <SimpleMDE onChange={(e) => setMarkdown(e)} events={{'drop':handleDrop}}/>
+      目次
+      <ReactMarkdown source={markdown} allowedTypes={ ["heading","text"]} />
+      <hr></hr>
       <ReactMarkdown source={markdown}　/>
     </div>
   );
